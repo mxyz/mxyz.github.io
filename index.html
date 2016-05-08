@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="src/css/todo.css">
   </head>
-  <body>
+  <body bgcolor="#E6E6FA">
     <!-- Import scripts -->
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -14,14 +14,18 @@
 
     <!-- App controller -->
     <script src="src/js/controller/todo.js"></script>
+    <script src="src/js/controller/login.js"></script>
+    <script src="src/js/controller/enroll.js"></script>
     <script src="src/js/route/route.js"></script>
+    <script src="src/js/service/studentservice.js"></script>
+
 
     <!-- some navigation -->
     <ul class="nav nav-pills">
-    <li role="presentation"><a ui-sref="home">Home</a></li>
-    <li role="presentation"><a ui-sref="changepage">Change Page</a></li>
+    <li role="presentation"><font size="3"><b>Enrollment</b></font></li>
+    <li role="presentation"><a ui-sref="enroll">Enrollment</a></li>
   </ul>
-
     <div ui-view></div>
   </body>
 </html>
+

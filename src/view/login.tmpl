@@ -1,0 +1,34 @@
+<!-- <div class="container">
+  <h2>Login</h2>
+
+  <div ng-controller="LoginController as Login"> 
+    <form ng-submit="Login.addTodo()">
+      <label>Student ID</label><br>
+      <input type="text" name="id" id="id" placeholder="Student ID"/><br>
+      <label>Password</label><br>
+      <input type="password" name="pwd" id="pwd" placeholder="Password"/><br><br>
+      <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+  </div>
+</div> -->
+
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <div ng-controller="LoginController as login"> 
+    <form name="form" ng-submit="login.addTodo()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label for="username">StudentID</label>
+            <input type="text" name="id" id="id" class="form-control" ng-model="vm.username" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">StudentID is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Password</label>
+            <input type="password" name="pwd" id="pwd" class="form-control" ng-model="vm.password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </form>
+</div>

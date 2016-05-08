@@ -1,0 +1,149 @@
+<div class="container">
+  <h1><b>Enrollment</b></h1>
+  <div ng-controller="LoginController as login">
+  <div ng-controller="enrollController as enroll">
+  		<p class="text-left">
+  			<div class="row">
+  				<div class="col-md-6" style="background-color:#EEFDEF;">
+  					<font size="4"><b>Kittipat's enrollment</b></font>
+  				</div>
+  				<div class="col-md-6">    				
+  					</div>
+  			</div>
+      		<div class="row">
+      			<div class="col-md-6" style="background-color:#EEFDEF;">
+    				<div class="panel panel-default">
+    					<div class="panel-heading">
+    						<div class="col-md-2"><b>ID</b></div>
+    						<div class="col-md-4"><b>Course Name(EN)</b></div>
+    					</div>
+    					<div ng-repeat="aenrollLists in enroll.indlists" >
+    						<div class="panel-body">
+    							<div class="col-md-2">{{aenrollLists.id}}</div>
+    							<div class="col-md-5">{{aenrollLists.name.en}}</div>
+    							<div class="col-md-3">
+    								<button type="button" class="btn btn-info" data-toggle="modal" ng-click="enroll.getDes(aenrollLists.id)" data-target="#myEnrolled">information</button>
+    							</div>
+    							<div class="col-md-2">
+    								<button type="button" class="btn btn-danger" data-toggle="modal" ng-click="enroll.getDes(aenrollLists.id)" data-target="#myDrop">Drop</button>
+    								    <!-- <input type="button" class="btn btn-danger" value="Drop" 
+    									ng-click="enroll.dropCourse(aenrollLists.id)" > -->
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    			<div class="col-md-6">
+    			    		
+    						<form ng-submit="enroll.searchin()">
+      						<input type="text" name="search" id="search" size="63" placeholder="Search by ID"/>
+     						<input class="btn btn-primary" type="submit" value="Search">
+     						</form>
+    					<div class="panel panel-default">
+    						<div class="panel-heading">
+    							<div class="col-md-2"><b>ID</b></div>
+    							<div class="col-md-4"><b>Course Name(EN)</b></div>
+    						</div>
+    						<div ng-repeat="enrollLists in enroll.showlists" >
+    						<div class="panel-body">
+
+    							<div class="col-md-2">{{enrollLists.id}}</div>
+    							<div class="col-md-5">{{enrollLists.name.en}}</div>
+    							<div class="col-md-3">
+
+									<button type="button" class="btn btn-info" data-toggle="modal" ng-click="enroll.getDes(enrollLists.id)" data-target="#myModal">information</button>
+    							</div>
+    							<div class="col-md-2">
+    								<button type="button" class="btn btn-primary" data-toggle="modal" ng-click="enroll.getDes(enrollLists.id)" data-target="#myEnroll">enroll</button>
+    							</div>
+    						</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</p>
+  	<div id="myModal" class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        			<h4 class="modal-title"><b>{{enroll.courseNameandID}}</b></h4>
+     			</div>
+      		<div class="modal-body">
+      		<b>Credit</b> 
+      		<p>{{enroll.coursecredit}}</p>
+      		<b>Course Description</b>
+        	<p>{{enroll.courseDes}}</p>
+      		</div>
+      		<div class="modal-footer">
+      			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myEnroll" data-dismiss="modal">enroll</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      		</div>
+    		</div>
+
+  		</div>
+	</div>
+
+	<div id="myEnroll" class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        			<h4 class="modal-title"><b>{{enroll.courseNameandID}}</b></h4>
+     			</div>
+      		<div class="modal-body">
+      		<p>Do you want to enroll this course.</p>
+      		</div>
+      		<div class="modal-footer">
+      			<button type="button" class="btn btn-primary" ng-click="enroll.enrollment(enroll.courseID)" data-dismiss="modal">Yes</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      		</div>
+    		</div>
+
+  		</div>
+	</div>
+
+	<div id="myEnrolled" class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        			<h4 class="modal-title"><b>{{enroll.courseNameandID}}</b></h4>
+     			</div>
+      		<div class="modal-body">
+      		<b>Credit</b> 
+      		<p>{{enroll.coursecredit}}</p>
+      		<b>Course Description</b>
+      		<br>
+        	<p>{{enroll.courseDes}}</p>
+      		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      		</div>
+    		</div>
+
+  		</div>
+	</div>
+
+<div id="myDrop" class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        			<h4 class="modal-title"><b>{{enroll.courseNameandID}}</b></h4>
+     			</div>
+      		<div class="modal-body">
+ 			<p>Are you sure to drop this course?</p>
+      		</div>
+      		<div class="modal-footer">
+      			<button type="button" class="btn btn-danger" ng-click="enroll.dropCourse(enroll.courseID)" data-dismiss="modal">Yes</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+      		</div>
+    		</div>
+
+  		</div>
+	</div>
+
+</div>
+</div>
+</div>
