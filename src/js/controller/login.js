@@ -13,6 +13,8 @@ angular.module('todoApp', ['ui.router'])
       var idlist = Login.lists
       id = document.getElementById('id').value
       var pwd = document.getElementById('pwd').value
+      document.getElementById('id').value= '';
+      document.getElementById('pwd').value= '';
         angular.forEach(idlist, function (list) {
           if (list.stdId == id && list.password == pwd){
             Login.ID = id
