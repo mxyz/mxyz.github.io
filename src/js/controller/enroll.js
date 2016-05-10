@@ -12,8 +12,7 @@ angular.module('todoApp')
     enrollLists.coursecredit = ''
     enrollLists.courselists = ''
     enrollLists.eachcourse = []
-    // enrollLists.indlists = StudentService.stdLists.course
-    // var enrollLists.showlists = []
+    enrollLists.wordjson =''
     $http.get('https://whsatku.github.io/skecourses/list.json')
       .success(function(responses){    
         enrollLists.lists = responses
@@ -39,6 +38,13 @@ angular.module('todoApp')
     })
       
       
+    enrollLists.getJSON = function() {
+    $http.get('http://52.37.98.127:3000/v1/5610546699/5610546699?pin=1937')
+      .success(function(responses){
+        enrollLists.wordjson = JSON.stringify(responses)
+        //alert(enrollLists.wordjson)
+      })
+    }
 
     enrollLists.searchin = function() { 
       var search = document.getElementById('search').value

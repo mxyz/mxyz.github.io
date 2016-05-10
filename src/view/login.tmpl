@@ -1,20 +1,23 @@
+
+<div ng-controller="LoginController as login"> 
 <ul class="nav nav-pills">
       <div class="row"  style="background-color:#EEFDEF;">
       <div class="col-md-10">
-      <li><h1><b style="margin-left: 20px;">KU Registeration</b></h1></li>
+      <li><h1><b style="margin-left: 20px;">SKE Registeration</b></h1></li>
       </div>
-      <div class="col-md-2">
-       <li class="active" id="hello"><button ui-sref="login" class="button button1">Login</button></li>
+      <div class="col-md-1">
+       <li class="active" id="hello"><button style="margin-left: -240px;" ui-sref="login" class="button button1">Login</button></li>
       </div>
+      <div class="col-md-1">
+      <button type="button" style="margin-top: 14px; margin-left: -325px;" class="button button5" data-toggle="modal" ng-click="login.getJSON()" data-target="#myJSON">JSON</button>
+    </div>
     </div>
   </ul>
+<div class="col-md-6 col-md-offset-3">
 
-<div class="col-md-10 col-md-offset-4">
-
-<div class="panel panel-default" id="panel-login" style="width: 30%;">
+<div class="panel panel-default" id="panel-login" style="width: 30%; margin-left: 300px">
   <div class="panel-body">
     <center><h2>Login</h2></center>
-    <div ng-controller="LoginController as login"> 
     <form name="form" ng-submit="login.addTodo()" role="form">
         <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
             <label for="username">StudentID</label>
@@ -29,8 +32,29 @@
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
         </div>
-      </div>
     </form>
+<!-- Nav bar -->
+<div id="myJSON" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title"><b>JSON</b></h4>
+          </div>
+          <div class="modal-body">
+          {{login.wordJSON}}
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        
+
+      </div>
+  </div>
+</div>
+
+
+
 </div>
 </div>
 </div>
