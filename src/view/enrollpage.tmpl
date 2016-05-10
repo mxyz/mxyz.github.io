@@ -26,7 +26,7 @@
   		<p class="text-left">
   			<div class="row">
   				<div class="col-md-6" style="background-color:#EEFDEF; margin-right: 5px; margin-left: -10px">
-  					<font size="4"><b>Kittipat's enrollment</b></font>
+  					<font size="4"><b>Kittipat's enrollment</b> current credits: {{enroll.icurrentcredit}}</font>
             <!-- <div class="col-md-6" style="background-color:#EEFDEF;"> -->
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -111,6 +111,7 @@
         			<h4 class="modal-title"><b>{{enroll.courseNameandID}}</b></h4>
      			</div>
       		<div class="modal-body">
+            <p><b>Credit: </b> {{enroll.coursecredit}}</p>
       		<p>Do you want to enroll this course.</p>
       		</div>
       		<div class="modal-footer">

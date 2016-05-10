@@ -13,6 +13,8 @@ angular.module('todoApp')
     enrollLists.courselists = ''
     enrollLists.eachcourse = []
     enrollLists.wordjson =''
+    enrollLists.credit = 0
+    enrollLists.icurrentcredit = 0
     $http.get('https://whsatku.github.io/skecourses/list.json')
       .success(function(responses){    
         enrollLists.lists = responses
@@ -21,6 +23,7 @@ angular.module('todoApp')
     $http.get('http://52.37.98.127:3000/v1/5610546699/5610546699?pin=1937')
       .success(function(responses){    
         enrollLists.indlists = responses.courses
+        enrollLists.icurrentcredit = responses.credits
         enrollLists.eachcourse = enrollLists.courselists.split(",")
         angular.forEach(enrollLists.lists, function (list){
         var dup = false;
@@ -65,25 +68,30 @@ angular.module('todoApp')
     }
 
     enrollLists.enrollment = function(cid){
-      var enId = cid;
-      var check = false
-      var showtemp = enrollLists.showlists
-      enrollLists.showlists = []
-      angular.forEach(enrollLists.indlists, function (list) {
-        if(list.id == enId){
-          check = true;  
-        }
-      })
-      if(!check){
-      angular.forEach(showtemp, function (list) {
-          if(list.id == enId){
-            enrollLists.indlists.push(list)
+      if(enrollLists.icurrentcredit+enrollLists.credit <= 22){
+            var enId = cid;
+            var check = false
+            var showtemp = enrollLists.showlists
+            enrollLists.showlists = []
+            angular.forEach(enrollLists.indlists, function (list) {
+              if(list.id == enId){
+                check = true;  
+              }
+            })
+            if(!check){
+            angular.forEach(showtemp, function (list) {
+                if(list.id == enId){
+                  enrollLists.indlists.push(list)
+                  enrollLists.icurrentcredit += enrollLists.credit
+                }
+                else
+                  enrollLists.showlists.push(list)
+            })
+            }
+            enrollLists.toDB();
           }
           else
-            enrollLists.showlists.push(list)
-      })
-      }
-      enrollLists.toDB();
+            window.alert("Your currently credit:"+enrollLists.icurrentcredit + ". you can't enroll this course with credit "+enrollLists.credit+".")
     }
 
     enrollLists.dropCourse = function(cid) {
@@ -93,6 +101,12 @@ angular.module('todoApp')
         angular.forEach(enrolltemp, function (list) {
           if(list.id != enId){
             enrollLists.indlists.push(list)
+            // console.log('asdasd'+enrollLists.credit)
+            // enrollLists.icurrentcredit -= enrollLists.credit
+          }
+          else if(list.id == enId){
+                        console.log('asdasd'+enrollLists.credit)
+            enrollLists.icurrentcredit -= enrollLists.credit
           }
           else
             enrollLists.showlists.push(list)
@@ -108,6 +122,7 @@ angular.module('todoApp')
         enrollLists.courseID = responses.id
         enrollLists.courseName = responses.name.en
         enrollLists.courseNameandID = responses.id + ' - '+responses.name.en
+        enrollLists.credit = responses.credit.total
         enrollLists.coursecredit = responses.credit.total + '('+ responses.credit.lecture +'-'+ responses.credit.lab +'-'+ responses.credit.self +')'
         enrollLists.courseDes = responses.description.en
     })
@@ -129,6 +144,7 @@ angular.module('todoApp')
         stdId: "5610546699",
         name: "Kittipat Promdirek",
         courses: enrollLists.indlists,
+        credits: enrollLists.icurrentcredit,
         password: "1234"
     }
 
